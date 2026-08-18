@@ -24,3 +24,22 @@ The image is a multi-stage build: a `builder` stage installs `mpstat`
 `python:3.12-slim` base image; the `final` stage only copies over those
 two binaries and their required shared libraries, keeping the shipped
 image free of apt's install-time cache and metadata.
+
+## Persisting output
+
+Each run also appends its report to `/var/log/perf-stats/report.log`
+inside the container (declared as a `VOLUME`, owned by the non-root
+`app` user). Mount a volume there to keep the log outside the container:
+
+```bash
+docker run --rm -v perf-logs:/var/log/perf-stats perf-stats
+# or bind-mounted to the host:
+docker run --rm -v "$(pwd)/logs":/var/log/perf-stats perf-stats
+```
+
+Override the log path with the `OUTFILE` env var if needed:
+
+```bash
+docker run --rm -e OUTFILE=/var/tmp/perf-stats/report.log \
+  -v perf-logs:/var/tmp/perf-stats perf-stats
+```

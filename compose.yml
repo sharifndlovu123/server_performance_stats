@@ -1,0 +1,9 @@
+services:
+
+  web:
+    build: .
+    volumes:
+      - sample-data:/var/log/perf-stats
+
+volumes:
+  sample-data:

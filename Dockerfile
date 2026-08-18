@@ -38,6 +38,12 @@ RUN chmod +x /src/performance.sh
 
 # Run as non-root.
 RUN useradd -m app
+
+# Report output is persisted here; mount a volume over this path to keep
+# it outside the container. Owned by `app` since we write to it as `app`.
+RUN mkdir -p /var/log/perf-stats && chown app:app /var/log/perf-stats
+VOLUME /var/log/perf-stats
+
 USER app
 
 # ENTRYPOINT (not CMD alone) so the container always runs performance.sh;
@@ -46,4 +52,4 @@ USER app
 ENTRYPOINT [ "/src/performance.sh" ]
 # Default: one-shot snapshot. Pass `true` to watch instead:
 #   docker run --rm -t image true
-CMD [ "false" ]
+CMD [ "true" ]
