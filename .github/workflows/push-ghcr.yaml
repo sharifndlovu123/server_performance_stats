@@ -37,7 +37,7 @@ jobs:
         run: docker build -t stats-perf .
       - name: Run Image
         if: success()
-        run: docker run --rm stats-perf 
+        run: docker run --rm stats-perf false
       - name: Push Image To GHCR
         if: success()
         run: docker push ghcr.io/sharifndlovu123/stats-perf:latest
