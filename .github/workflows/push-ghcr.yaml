@@ -36,5 +36,6 @@ jobs:
       - name: Build Image
         run: docker build -t stats-perf .
       - name: Run Image
+        if: success()
         run: docker run --rm perf-stats 
   
