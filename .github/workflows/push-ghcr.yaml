@@ -13,14 +13,21 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7 #latest
-      - run: sudo apt update && sudo apt upgrade -y
       - run: chmod +x src/performance.sh
       - run: sudo ./src/performance.sh 
+      # - run: sudo apt update && sudo apt upgrade -y
 
-  # deploy-to-ghcr:
-  #   needs: 
-  #     - test
-  #   runs-on: ubuntu-24.04
-  #   steps:
-  #     - run: login to Docker hub
+
+  deploy-to-ghcr:
+    needs: 
+      - test
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Log in to registry
+        # This is where you will update the PAT to GITHUB_TOKEN
+        run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Build Image
+        run: docker build -t stats-perf .
+      - name: Run Image
+        run: docker run --rm perf-stats 
   
