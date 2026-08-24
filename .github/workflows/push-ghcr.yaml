@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7 #latest
       - run: chmod +x src/performance.sh
-      - run: ./src/performance.sh
+      - run: sudo ./src/performance.sh 
 
   # deploy-to-ghcr:
   #   needs: 
