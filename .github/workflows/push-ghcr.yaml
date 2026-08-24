@@ -13,9 +13,8 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - uses: actions/checkout@v7 #latest
-      - run: echo "hello" 
-      - run: pwd
-      - run: ls -la
+      - run: chmod +x src/performance.sh
+      - run: ./src/performance.sh
 
   # deploy-to-ghcr:
   #   needs: 
