@@ -49,7 +49,7 @@ report() {
 	print_section "Memory Usage"
 	free -hm
 	print_section "CPU Usage"
-	mpstat -P 0-15
+	mpstat -P ALL
 	print_section "Disk Usage"
 	df -h --output=size,used,avail,target
 }
