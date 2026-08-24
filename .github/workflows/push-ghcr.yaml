@@ -23,10 +23,11 @@ jobs:
       - test
     runs-on: ubuntu-24.04
     steps:
-      - name: Log in to registry
-        # This is where you will update the PAT to GITHUB_TOKEN
-        # run: echo "${{ secrets.PAT }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
-        run: echo $PAT | docker login ghcr.io -u ${{ github.actor }} --password-stdin
+      - name: Login to Docker Hub
+        uses: docker/login-action@v4.6.0 
+        with:
+          username: ${{ github.actor }}
+          password: ${{ secrets.PAT }}
       - name: Build Image
         run: docker build -t stats-perf .
       - name: Run Image
