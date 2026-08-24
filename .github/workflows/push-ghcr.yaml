@@ -1,0 +1,26 @@
+name: Deploy image to GHCR
+
+on: 
+  push:
+    branches:
+      - main
+   
+env:
+  PAT: ${{ secrets.PAT  }}
+    
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@7 #latest
+      - run: echo "hello" 
+      - run: pwd
+      - run: ls -la
+
+  # deploy-to-ghcr:
+  #   needs: 
+  #     - test
+  #   runs-on: ubuntu-24.04
+  #   steps:
+  #     - run: login to Docker hub
+  
