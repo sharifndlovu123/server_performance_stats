@@ -72,7 +72,7 @@ if [ "$watch" == "true" ]; then
 else
 	print_banner "Performance Snapshot" | tee -a "$OUTFILE"
 	report | tee -a "$OUTFILE"
-	exit 1
+	exit 0
 fi
 
 #  call method with watch=true to watch performance --watch true
