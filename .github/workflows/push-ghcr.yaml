@@ -8,6 +8,10 @@ on:
 env:
   PAT: ${{ secrets.PAT  }}
     
+permissions:
+  contents: read
+  packages: write
+  
 jobs:
   test:
     runs-on: ubuntu-24.04
